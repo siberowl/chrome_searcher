@@ -14,13 +14,12 @@ document.addEventListener("keypress", (event) => {
   });
   let inputs = ["input", "select", "button", "textarea"];
   // check that an input field is not in focus
-  if (
-    document.activeElement &&
-    inputs.indexOf(activeElement.tagName.toLowerCase()) !== -1
-  ) {
-    if (event.key === "/") {
-      event.preventDefault();
-      searchBox.focus();
+  if (document.activeElement) {
+    if (inputs.indexOf(document.activeElement.tagName.toLowerCase()) !== -1) {
+      if (event.key === "/") {
+        event.preventDefault();
+        searchBox.focus();
+      }
     }
   }
 });
