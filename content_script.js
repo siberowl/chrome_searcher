@@ -3,7 +3,6 @@ document.addEventListener("keypress", (event) => {
   let inputBoxes = document.querySelectorAll(
     "input[type = 'text'], input[type = 'search']"
   );
-  console.log(inputBoxes);
   let searchBox = inputBoxes[0];
   // choose the upper most as the search bar
   inputBoxes.forEach((inputBox) => {
