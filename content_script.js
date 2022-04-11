@@ -3,25 +3,23 @@ document.addEventListener("keypress", (event) => {
   let inputBoxes = document.querySelectorAll(
     "input[type = 'text'], input[type = 'search']"
   );
-  let searchBox = inputBoxes[0];
+  let searchBox = null;
   // choose the upper most as the search bar
   inputBoxes.forEach((inputBox) => {
-    if (inputBox.offsetParent != null) {
-      if (inputBox.clientTop < searchBox.clientTop) {
+    if (inputBox.offsetParent != null && inputBox.style.display != "none") {
+      if (searchBox === null || inputBox.clientTop < searchBox.clientTop) {
         searchBox = inputBox;
       }
     }
   });
   let inputs = ["input", "select", "button", "textarea"];
   // check that an input field is not in focus
-  if (document.activeElement) {
+  if (document.activeElement && searchBox !== null) {
     if (!inputs.includes(document.activeElement.tagName.toLowerCase())) {
       if (event.key === "/") {
         event.preventDefault();
-        searchBox.focus();
+        setTimeout(() => searchBox.focus(), 0);
       }
-    } else {
-      console.log("input");
     }
   }
 });
