@@ -1,14 +1,18 @@
 document.addEventListener("keypress", (event) => {
   // select all input boxes
-  let inputBoxes = document.querySelectorAll(
-    "input[type = 'text'], input[type = 'search']"
-  );
+  let inputBoxes = document.querySelectorAll("input");
   let searchBox = null;
   // choose the upper most as the search bar
   inputBoxes.forEach((inputBox) => {
-    if (inputBox.offsetParent != null && inputBox.style.display != "none") {
-      if (searchBox === null || inputBox.clientTop < searchBox.clientTop) {
-        searchBox = inputBox;
+    if (
+      inputBox.type === "text" ||
+      inputBox.type === "search" ||
+      inputBox.type === ""
+    ) {
+      if (inputBox.offsetParent != null && inputBox.style.display != "none") {
+        if (searchBox === null || inputBox.clientTop < searchBox.clientTop) {
+          searchBox = inputBox;
+        }
       }
     }
   });
