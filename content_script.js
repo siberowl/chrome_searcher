@@ -3,6 +3,7 @@ document.addEventListener("keypress", (event) => {
   let inputBoxes = document.querySelectorAll(
     "input[type = 'text'], input[type = 'search']"
   );
+  console.log(inputBoxes);
   let searchBox = inputBoxes[0];
   // choose the upper most as the search bar
   inputBoxes.forEach((inputBox) => {
@@ -15,11 +16,13 @@ document.addEventListener("keypress", (event) => {
   let inputs = ["input", "select", "button", "textarea"];
   // check that an input field is not in focus
   if (document.activeElement) {
-    if (inputs.indexOf(document.activeElement.tagName.toLowerCase()) !== -1) {
+    if (!inputs.includes(document.activeElement.tagName.toLowerCase())) {
       if (event.key === "/") {
         event.preventDefault();
         searchBox.focus();
       }
+    } else {
+      console.log("input");
     }
   }
 });
