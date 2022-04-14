@@ -1,6 +1,6 @@
 {
-  "name": "Search key",
-  "description": "An extension to universalize the shortcut key for the search bar",
+  "name": "Universal Search Hotkey",
+  "description": "An extension to universalize the shortcut key for any search bar",
   "version": "1.0",
   "manifest_version": 3,
   "content_scripts": [
