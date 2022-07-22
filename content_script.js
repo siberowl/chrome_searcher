@@ -1,8 +1,23 @@
+const targetIsInput = (target) => {
+  const isInput = false;
+
+  if (
+    window.getComputedStyle(target).cursor === "text" ||
+    target.contentEditable ||
+    target.tagName.toLowerCase() === "input" ||
+    target.tagName.toLowerCase() === "textarea"
+  ) {
+    isInput = true;
+  }
+
+  return isInput;
+};
+
 document.addEventListener("keypress", (event) => {
   // check if key is /
   if (event.key === "/") {
     // check that an input field is not in focus
-    if (window.getComputedStyle(document.activeElement).cursor !== "text") {
+    if (!targetIsInput(document.activeElement)) {
       // select all input boxes
       let inputBoxes = document.querySelectorAll("input");
       let searchBox = null;
