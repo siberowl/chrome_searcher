@@ -3,18 +3,18 @@ document.addEventListener("keypress", (event) => {
   if (event.key === "/") {
     const target = document.activeElement;
     // check that an input field is not in focus
-    if (target && !targetIsInput(document.activeElement)) {
+    if (!targetIsInput(target)) {
       focusOnSearchBox();
     }
   }
 });
 
 const targetIsInput = (target) => {
-  const isInput = false;
+  let isInput = false;
 
   if (
     window.getComputedStyle(target).cursor === "text" ||
-    target.contentEditable ||
+    target.contentEditable === "true" ||
     target.tagName.toLowerCase() === "input" ||
     target.tagName.toLowerCase() === "textarea"
   ) {
