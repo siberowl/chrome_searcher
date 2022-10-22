@@ -1,10 +1,10 @@
-document.addEventListener("keypress", (event) => {
+document.addEventListener("keydown", (event) => {
   // check if key is /
   if (event.key === "/") {
     const target = document.activeElement;
     // check that an input field is not in focus
     if (!targetIsInput(target)) {
-      focusOnSearchBox();
+      focusOnSearchBox(event);
     }
   }
 });
@@ -24,12 +24,17 @@ const targetIsInput = (target) => {
   return isInput;
 };
 
-const focusOnSearchBox = () => {
+const focusOnSearchBox = (event) => {
   let searchBox = getSearchBox();
   if (searchBox !== null) {
     event.preventDefault();
-    // wait for blur to finish
-    setTimeout(() => searchBox.focus(), 0);
+
+    const onNextTick = () => {
+      searchBox.focus();
+    };
+
+    // Wait until next tick for blur to finish.
+    setTimeout(onNextTick, 0);
   }
 };
 
@@ -41,7 +46,7 @@ const getSearchBox = () => {
   inputBoxes.forEach((inputBox) => {
     if (inputBox.type === "text" || inputBox.type === "search") {
       if (inputBox.offsetParent != null && inputBox.style.display != "none") {
-        if (searchBox === null || inputBox.clientTop < searchBox.clientTop) {
+        if (searchBox === null || inputBox.getBoundingClientRect().y < searchBox.getBoundingClientRect().y) {
           searchBox = inputBox;
         }
       }
